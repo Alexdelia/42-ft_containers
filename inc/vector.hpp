@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/01/31 11:43:05 by adelille         ###   ########.fr       */
+/*   Updated: 2022/01/31 11:51:39 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,20 @@
 class vector
 {
 	public:
-		vector(void);
-		vector(const vector &src);
+
+		// default (1)
+		explicit vector (const allocator_type& alloc = allocator_type());
+		// fill (2)
+		explicit vector (size_type n, const value_type& val = value_type(),
+				const allocator_type& alloc = allocator_type());
+		// range (3)
+		template <class InputIterator>
+			vector (InputIterator first, InputIterator last,
+					const allocator_type& alloc = allocator_type());
+		// copy (4)
+		vector (const vector& x);
+
+		// destructor
 		virtual ~vector(void);
 
 		vector	&operator=(const vector &rhs);
