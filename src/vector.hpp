@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/01/31 11:51:39 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:24:14 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,24 @@
 
 # include <iostream>
 //# include <typeinfo>
+// iterator
 
+namespace ft {
+
+template < class T, class Alloc = std::allocator<T> >
 class vector
 {
+	public:
+		// typedef: https://cplusplus.com/reference/vector/vector/
+		typedef T									value_type;
+		typedef Alloc								allocator_type;
+		typedef typename allocator_type::size_type	size_type;
+
+		typedef /**/<value_type>              iterator;
+		typedef /**/<value_type const>        const_iterator;
+		typedef ft::reverse_iterator<iterator>           reverse_iterator;
+		typedef ft::reverse_iterator<const_iterator>     const_reverse_iterator;
+
 	public:
 
 		// default (1)
@@ -69,5 +84,7 @@ bool	operator>=(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs
 // std::swap
 template< class T, class Alloc >
 void	swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
+
+}
 
 #endif
