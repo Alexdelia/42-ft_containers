@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 13:34:47 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/02 13:43:21 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:04:03 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ namespace ft
 		class random_access_iterator
 		{
 			public:
-
 				typedef T								value_type;
 				typedef value_type						&reference;
 				typedef value_type						*pointer;
@@ -41,6 +40,78 @@ namespace ft
 					_ptr = src._ptr;
 					return (*this);
 				}
+
+				operator	random_access_iterator<value_type const>() const
+				{return (random_access_iterator<value_type const>(_ptr));}
+
+				// bool
+				bool	operator==(const random_access_iterator &other) const
+				{return (_ptr == other._ptr);}
+				bool	operator!=(const random_access_iterator &other) const
+				{return (_ptr != other._ptr);}
+				bool	operator<(const random_access_iterator &other) const
+				{return (_ptr < other._ptr);}
+				bool	operator>(const random_access_iterator &other) const
+				{return (_ptr > other._ptr);}
+				bool	operator<=(const random_access_iterator &other) const
+				{return (_ptr <= other._ptr);}
+				bool	operator>=(const random_access_iterator &other) const
+				{return (_ptr >= other._ptr);}
+
+				// increment/decrement
+				random_access_iterator	&operator++()
+				{
+					++_ptr;
+					return (*this);
+				}
+				random_access_iterator	operator++(int)
+				{
+					random_access_iterator	tmp(*this);
+					++_ptr;
+					return (tmp);
+				}
+				random_access_iterator	&operator--()
+				{
+					--_ptr;
+					return (*this);
+				}
+				random_access_iterator	operator--(int)
+				{
+					random_access_iterator	tmp(*this);
+					--_ptr;
+					return (tmp);
+				}
+
+				// assignment
+				random_access_iterator	&operator+=(difference_type n)
+				{
+					_ptr += n;
+					return (*this);
+				}
+				random_access_iterator	&operator-=(difference_type n)
+				{
+					_ptr -= n;
+					return (*this);
+				}
+
+				// arithmetic
+				random_access_iterator	operator+(difference_type val) const
+				{return (random_access_iterator<T>(_ptr + val));}
+				random_access_iterator	operator-(difference_type val) const
+				{return (random_access_iterator<T>(_ptr - val));}
+				difference_type	operator+(random_access_iterator const &rhs) const
+				{return (_ptr + rhs._ptr);}
+				difference_type	operator-(random_access_iterator const &rhs) const
+				{return (_ptr - rhs._ptr);}
+
+				// access
+				reference	operator*() const
+				{return (*_ptr);}
+				pointer		operator->() const
+				{return (_ptr);}
+				reference	operator[](difference_type n) const
+				{return (_ptr[n]);}
+
 
 			private:
 				pointer	_ptr;
