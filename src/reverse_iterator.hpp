@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:25:54 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/02 18:48:52 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:51:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ namespace ft
 				explicit reverse_iterator (iterator_type it) : _ptr(it) {};
 				reverse_iterator (const reverse_iterator<Iterator>& rev_it) : _ptr(rev_it._ptr) {};
 
-				reverse_iterator	&operator=(const reverse_iterator& it)
+				reverse_iterator	&operator=(const reverse_iterator &src)
 				{
-					_ptr = it._ptr;
+					_ptr = src._ptr;
 					return (*this);
 				}
 
