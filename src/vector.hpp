@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/02 13:36:28 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/02 18:25:33 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <iostream>
 //# include <typeinfo>
-// iterator
+
+# include "random_access_iterator.hpp"
+# include "reverse_iterator.hpp"
 
 namespace ft
 {
@@ -24,14 +26,14 @@ namespace ft
 		{
 			public:
 				// typedef: https://cplusplus.com/reference/vector/vector/
-				typedef T									value_type;
-				typedef Alloc								allocator_type;
-				typedef typename allocator_type::size_type	size_type;
+				typedef T												value_type;
+				typedef Alloc											allocator_type;
+				typedef typename allocator_type::size_type				size_type;
 
-				typedef /**/<value_type>              iterator;
-				typedef /**/<value_type const>        const_iterator;
-				typedef ft::reverse_iterator<iterator>           reverse_iterator;
-				typedef ft::reverse_iterator<const_iterator>     const_reverse_iterator;
+				typedef ft::random_access_iterator<value_type>			iterator;
+				typedef ft::random_access_iterator<value_type const>	const_iterator;
+				typedef ft::reverse_iterator<iterator>					reverse_iterator;
+				typedef ft::reverse_iterator<const_iterator>			const_reverse_iterator;
 
 			public:
 
