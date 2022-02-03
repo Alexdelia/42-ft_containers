@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/03 11:54:13 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:43:42 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,28 @@ namespace ft
 						_alloc.deallocate(_array, _capacity);
 				}
 
-				vector	&operator=(const vector &rhs);
-
-				// element access
+				// assign
+				vector	&operator=(const vector &x)
+				{
+					if (this != &x)
+					{
+						clear();
+						if (_capacity < x._size)
+							reserve(x._size);
+						_size = x._size;
+						if (_array)
+							_alloc.deallocate(_array, _capacity);
+						if (x._array)
+						{
+							_array = _alloc.allocate(_capacity);
+							for (size_type i = 0; i < _size; i++)
+								_alloc.construct(&_array[i], x._array[i]);
+						}
+						else
+							_array = NULL;
+					}
+					return (*this);
+				}
 
 				// iterators
 				iterator				begin();
@@ -141,6 +160,8 @@ namespace ft
 						_array = tmp;
 					}
 				}
+
+				// element access
 
 				// modifiers
 				void	clear(void)
