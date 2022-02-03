@@ -6,18 +6,22 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/03 14:43:42 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/03 17:16:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_HPP
 # define VECTOR_HPP
 
+// https://cplusplus.com/reference/vector/vector/
+
 # include <iostream>
 //# include <typeinfo>
 
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
+# include "enable_if.hpp"
+# include "is_integral.hpp"
 
 namespace ft
 {
@@ -25,7 +29,6 @@ namespace ft
 		class vector
 		{
 			public:
-				// typedef: https://cplusplus.com/reference/vector/vector/
 				typedef T												value_type;
 				typedef value_type*										pointer_type;
 				typedef value_type&										reference_type;
