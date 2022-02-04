@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/03 17:23:26 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:52:28 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,71 @@ namespace ft
 						_alloc.construct(&_array[i], val);
 					_size = n;
 				}
+				void	push_back(const value_type &val)
+				{
+					if (_size == _capacity)
+					{
+						if (_capacity == 0)
+							reserve(1);
+						else
+							reserve(_capacity * 2);
+					}
+					_alloc.construct(&_array[_size], val);
+					_size++;
+				}
+				void	pop_back(void)
+				{
+					_alloc.destroy(&_array[_size - 1]);
+					_size--;
+				}
+				iterator	insert(iterator position, const value_type &val)
+				{
+					size_type	i = &*position - &*begin();
+
+					if (_size == _capacity)
+					{
+						if (_capacity == 0)
+							reserve(1);
+						else
+							reserve(_capacity * 2);
+					}
+					_shift_right(i, 1);
+					_alloc.construct(&_array[i], val);
+					_size++;
+					return (iterator(&_array[i]));
+				}
+				void	insert(iterator position, size_type n, const value_type &val)
+				{
+					size_type	i = &*position - &*begin();
+
+					if (_size + n > _capacity)
+						reserve(_size + n);
+					_shift_right(i, n);
+					for (size_type j = 0; j < n; j++)
+						_alloc.construct(&_array[i + j], val);
+					_size += n;
+				}
+				template <class InputIterator>
+					void	insert(iterator position, InputIterator first, InputIterator last,
+							typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+					{
+						size_type	i = &*position - &*begin();
+						size_type	n = std::distance(first, last);
+
+						if (_size + n > _capacity)
+							reserve(_size + n);
+						_shift_right(i, n);
+						for (size_type x = 0; x < n; x++)
+							_alloc.construct(&_array[i + x], *(first + x));
+						_size += n;
+					}
+				void	swap(vector &x)
+				{
+					std::swap(_array, x._array);
+					std::swap(_size, x._size);
+					std::swap(_capacity, x._capacity);
+					std::swap(_alloc, x._alloc);
+				}
 				void	clear(void)
 				{
 					for (size_type i = 0; i < _size; i++)
@@ -198,7 +263,18 @@ namespace ft
 					_size = 0;
 				}
 
-			private: //
+			private:
+
+				void _shift_right(size_type position, size_type n)
+				{
+					if (empty())
+						return;
+					for (size_type i = _size - 1; i >= position; i--)
+					{
+						_alloc.construct(&_array[i + n], _array[i]);
+						_alloc.destroy(&_array[i]);
+					}
+				}
 		};
 
 	//std::ostream	&operator<<(std::ostream &o, vector const &src);
