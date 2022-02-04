@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/04 13:52:28 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:55:28 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,26 @@ namespace ft
 							_alloc.construct(&_array[i + x], *(first + x));
 						_size += n;
 					}
+				iterator	erase(iterator position)
+				{
+					size_type i = &*position - &*begin();
+
+					_alloc.destroy(&_array[i]);
+					_shift_left(i, 1);
+					_size--;
+					return (iterator(&_array[i]));			
+				}
+				iterator	erase(iterator first, iterator last)
+				{
+					size_type	x = &*first - &*begin();
+					size_type	y = &*last - &*begin();
+
+					for (size_type z = x; z < y; z++)
+						_alloc.destroy(&_array[z]);
+					_shift_left(x, y - x);
+					_size -= y - x;
+					return (iterator(&_array[x]));
+				}
 				void	swap(vector &x)
 				{
 					std::swap(_array, x._array);
@@ -265,7 +285,7 @@ namespace ft
 
 			private:
 
-				void _shift_right(size_type position, size_type n)
+				void	_shift_right(size_type position, size_type n)
 				{
 					if (empty())
 						return;
@@ -273,6 +293,16 @@ namespace ft
 					{
 						_alloc.construct(&_array[i + n], _array[i]);
 						_alloc.destroy(&_array[i]);
+					}
+				}
+				void	_shift_left(size_type position, size_type n)
+				{
+					if (empty())
+						return;
+					for (size_type i = position; i < _size - n; i++)
+					{
+						_alloc.construct(&_array[i], _array[i + n]);
+						_alloc.destroy(&_array[i + n]);
 					}
 				}
 		};
