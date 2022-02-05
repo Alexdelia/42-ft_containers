@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:13:04 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 19:32:34 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:29:58 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static int	test_reverse_iterator(void)
 	while (rbegin != rend)
 	{
 		std::cerr << *rbegin << "|";
-		rbegin++;
-		ret++;
+		++rbegin;
+		++ret;
 	}
 	std::cerr << std::endl;
 	
-	rbegin--;
-	copy--;
+	--rbegin;
+	--copy;
 	std::cerr << "|";
 	while (rbegin != copy)
 	{
 		std::cerr << *rbegin << "|";
-		rbegin--;
+		--rbegin;
 	}
 	std::cerr << std::endl;
 	return (ret);
@@ -67,18 +67,18 @@ static int	test_reverse_iterator_std(void)
 	while (rbegin != rend)
 	{
 		std::cerr << *rbegin << "|";
-		rbegin++;
-		ret++;
+		++rbegin;
+		++ret;
 	}
 	std::cerr << std::endl;
 	
-	rbegin--;
-	copy--;
+	--rbegin;
+	--copy;
 	std::cerr << "|";
 	while (rbegin != copy)
 	{
 		std::cerr << *rbegin << "|";
-		rbegin--;
+		--rbegin;
 	}
 	std::cerr << std::endl;
 	return (ret);
