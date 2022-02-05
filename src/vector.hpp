@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 12:47:12 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:55:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,14 +129,22 @@ namespace ft
 				}
 
 				// iterators
-				iterator				begin();
-				const_iterator			begin() const;
-				iterator				end();
-				const_iterator			end() const;
-				reverse_iterator		rbegin();
-				const_reverse_iterator	rbegin() const;
-				reverse_iterator		rend();
-				const_reverse_iterator	rend() const;
+				iterator	begin()
+				{return (iterator(_array));}
+				const_iterator	begin() const
+				{return (const_iterator(_array));}
+				iterator	end()
+				{return (iterator(_array + _size));}
+				const_iterator	end() const
+				{return (const_iterator(_array + _size));}
+				reverse_iterator	rbegin()
+				{return (reverse_iterator(_array + _size));}
+				const_reverse_iterator	rbegin() const
+				{return (const_reverse_iterator(_array + _size));}
+				reverse_iterator	rend()
+				{return (reverse_iterator(_array));}
+				const_reverse_iterator	rend() const
+				{return (const_reverse_iterator(_array));}
 
 				// capacity
 				size_type	size(void) const
