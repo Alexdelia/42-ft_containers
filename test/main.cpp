@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:52:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 16:12:36 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 17:05:25 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(void)
 	int	ret;
 
 	ret = 0;
-	ret |= test_iterator();
-	ret |= test_vector();
+	ret |= ts("iterator", &test_iterator);
+//	ret |= ts("vector", &test_vector);
 
 	return (ret);
 }

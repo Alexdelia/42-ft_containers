@@ -6,18 +6,18 @@
 #    By: adelille <adelille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 19:21:49 by adelille          #+#    #+#              #
-#    Updated: 2022/02/01 15:13:07 by adelille         ###   ########.fr        #
+#    Updated: 2022/02/05 17:09:33 by adelille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	a.out
+NAME =	ft_containers
 CC = 	clang++
 AR =	ar rcs
 RM = 	rm -rf
 
 CFLAGS =	-Wall -Werror -Wextra
 # CFLAGS +=	-O2
-# CFLAGS +=	-g3
+CFLAGS +=	-g3
 # CFLAGS +=	-fsanitize=address
 
 # **************************************************************************** #
@@ -43,9 +43,9 @@ CLR =	$(shell tput el 1)
 # **************************************************************************** #
 #	SRCS	#
 
-SRCSPATH =	./
+SRCSPATH =	./test/
 OBJSPATH =	./obj/
-INC =		./inc/
+INC =		./
 
 SRCS =		$(wildcard $(SRCSPATH)*.cpp) $(wildcard $(SRCSPATH)**/*.cpp)
 SRCSNAME =	$(subst $(SRCSPATH), , $(SRCS))
