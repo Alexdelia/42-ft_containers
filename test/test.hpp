@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 18:19:37 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:05:35 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 //# include <numeric>
 # include <chrono> // cpp+11 to get time
 
-//# include <vector>
+# include <vector>
 
 # include "../src/random_access_iterator.hpp"
 # include "../src/reverse_iterator.hpp"
