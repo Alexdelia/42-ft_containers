@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 12:36:21 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:47:12 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 // https://cplusplus.com/reference/vector/vector/
 
+# include <memory>
 # include <iostream>
 //# include <typeinfo>
 
@@ -167,6 +168,30 @@ namespace ft
 				}
 
 				// element access
+				reference	operator[](size_type n)
+				{return (_array[n]);}
+				const_reference	operator[](size_type n) const
+				{return (_array[n]);}
+				reference	at(size_type n)
+				{
+					if (n >= _size)
+						throw std::out_of_range("out of range");
+					return (_array[n]);
+				}
+				const_reference	at(size_type n) const
+				{
+					if (n >= _size)
+						throw std::out_of_range("out of range");
+					return (_array[n]);
+				}
+				reference	front(void)
+				{return (_array[0]);}
+				const_reference	front(void) const
+				{return (_array[0]);}
+				reference	back(void)
+				{return (_array[_size - 1]);}
+				const_reference	back(void) const
+				{return (_array[_size - 1]);}
 
 				// modifiers
 				template <class InputIterator>
@@ -284,6 +309,10 @@ namespace ft
 						_alloc.destroy(&_array[i]);
 					_size = 0;
 				}
+
+				// allocator:
+				allocator_type	get_allocator() const
+				{return (_alloc);}
 
 			private:
 
