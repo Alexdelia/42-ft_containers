@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 17:19:10 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 18:19:37 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "../src/vector.hpp"
 
 bool	ts(const std::string &name, bool (*f)(void));
-bool	tl(const std::string &name, bool (*f)(void), bool (*f_std)(void));
+bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void));
 
 bool	test_iterator(void);
 bool	test_vector(void);
