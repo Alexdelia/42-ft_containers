@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 12:55:59 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 15:44:08 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,23 @@ namespace ft
 				{return (_size);}
 				size_type	max_size(void) const
 				{return (_alloc.max_size());}
+				void	resize(size_type n, value_type val = value_type())
+				{
+					if (n > _capacity)
+						reserve(n);
+					if (n > _size)
+					{
+						for (size_type i = _size; i < n; i++)
+							_alloc.construct(&_array[i], val);
+						_size = n;
+					}
+					else if (n < _size)
+					{
+						for (size_type i = n; i < _size; i++)
+							_alloc.destroy(&_array[i]);
+						_size = n;
+					}
+				}
 				size_type	capacity(void) const
 				{return (_capacity);}
 				bool	empty(void) const
