@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/04 13:55:28 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:36:21 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "reverse_iterator.hpp"
 # include "enable_if.hpp"
 # include "is_integral.hpp"
+# include "lexicographical_compare.hpp"
+# include "equal.hpp"
 
 namespace ft
 {
@@ -309,18 +311,34 @@ namespace ft
 
 	//std::ostream	&operator<<(std::ostream &o, vector const &src);
 
-	template< class T, class Alloc >
-		bool	operator==(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
-	bool	operator!=(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
-	bool	operator<(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
-	bool	operator<=(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
-	bool	operator>(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
-	bool	operator>=(const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs);
+	// relational operators
+	template <class T, class Alloc>
+		bool	operator==(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{
+			if (lhs.size() != rhs.size())
+				return false;
+			return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		}
+	template <class T, class Alloc>
+		bool	operator!=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{return !(lhs == rhs);}
+	template <class T, class Alloc>
+		bool	operator<(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));}
+	template <class T, class Alloc>
+		bool	operator<=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{return ((lhs == rhs) || (lhs < rhs));}
+	template <class T, class Alloc>
+		bool	operator>(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{return !(lhs <= rhs);}
+	template <class T, class Alloc>
+		bool	operator>=(const vector<T, Alloc> &lhs, const vector<T, Alloc> &rhs)
+		{return ((lhs == rhs) || (lhs > rhs));}
 
-	// std::swap
-	template< class T, class Alloc >
-		void	swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
-
+	// swap
+	template <class T, class Alloc>
+		void swap	(vector<T,Alloc>& x, vector<T,Alloc>& y)
+		{x.swap(y);}
 }
 
 #endif
