@@ -6,14 +6,11 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:11:59 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 12:14:38 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:18:28 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.hpp"
-
-#include <unistd.h>
-#include <sys/ioctl.h>
 
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 {

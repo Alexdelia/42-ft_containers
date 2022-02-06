@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 11:56:33 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:18:46 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <iostream>
 //# include <numeric>
 # include <chrono> // cpp+11 to get time
+# include <unistd.h>
+# include <sys/ioctl.h>
 
 # include <vector>
 
