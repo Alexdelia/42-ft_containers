@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 13:56:24 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 14:04:05 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,57 @@ static int	test_v_iterator_std(void)
 	return (false);
 }
 
+static int	test_size(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(42, 21);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	if (v1.size() != 0 || v2.size() != 42 || v3.size() != 3)
+		return (true);
+	return (v1.size() + v2.size() + v3.size());
+}
+
+static int	test_size_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(42, 21);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	if (v1.size() != 0 || v2.size() != 42 || v3.size() != 3)
+		return (true);
+	return (v1.size() + v2.size() + v3.size());
+}
+
+static int	test_max_size(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(42, 21);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	std::cerr << v1.max_size() << std::endl;
+	std::cerr << v2.max_size() << std::endl;
+	std::cerr << v3.max_size() << std::endl;
+	
+	return (v1.max_size() + v2.max_size() + v3.max_size());
+}
+
+static int	test_max_size_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(42, 21);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	std::cerr << v1.max_size() << std::endl;
+	std::cerr << v2.max_size() << std::endl;
+	std::cerr << v3.max_size() << std::endl;
+	return (v1.max_size() + v2.max_size() + v3.max_size());
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -136,6 +187,8 @@ bool	test_vector(void)
 	ret |= tl("constructor", &test_constructor, &test_constructor_std);
 	ret |= tl("reverse iterator", &test_v_iterator, &test_v_iterator_std);
 //	ret |= tl("capacity", &test_capacity, &test_capacity_std);
+	ret |= tl("size", &test_size, &test_size_std);
+	ret |= tl("max size", &test_max_size, &test_max_size_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
