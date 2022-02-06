@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 14:16:04 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 14:18:40 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ static int	test_resize(void)
 	}
 	catch (std::length_error)
 	{
-		std::cerr << "resize(-1) execption working" << std::endl;
+		std::cerr << C_GREEN << "resize(-1) exception working" << C_RESET <<std::endl;
 	}
 	v2.resize(10);
 	v3.resize(5);
@@ -216,7 +216,7 @@ static int	test_resize_std(void)
 	}
 	catch (std::length_error)
 	{
-		std::cerr << "resize(-1) execption working" << std::endl;
+		std::cerr << C_GREEN << "resize(-1) exception working" << C_RESET <<std::endl;
 	}
 	v2.resize(10);
 	v3.resize(5);
