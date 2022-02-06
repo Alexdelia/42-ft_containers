@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:11:59 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 12:09:04 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:14:38 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 	std::chrono::duration<double>	diff;
 	std::chrono::duration<double>	diff_std;
 	struct winsize					w;
+	int								indent;
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	indent = w.ws_col - 9 - name.size();
 	std::cout << C_BOLD << C_MAGENTA << C_DIM << "  [" + name + "]"
-		<< std::string(w.ws_col - 20 - name.size(), ' ') << C_RESET;
+		<< std::string((indent < 1 ? 1 : indent), ' ') << C_RESET;
 	std::cerr << std::endl;
 	{
 		auto	start = std::chrono::high_resolution_clock::now();
@@ -71,8 +73,8 @@ bool	ts(const std::string &name, bool (*f)(void))
 		<< "\t[" << name << "]" << C_RESET << std::endl;
 	std::cerr << std::endl;
 	ret = f();
-	std::cout << C_BOLD <<
-		(ret ? C_RED : C_GREEN) << (ret ? "[KO]" : "[OK]")
+	std::cout << C_BOLD << "\t"
+		<< (ret ? C_RED : C_GREEN) << (ret ? "[KO]" : "[OK]")
 		<< C_RESET << std::endl;
 	return (ret);
 }
