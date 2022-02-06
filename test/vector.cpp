@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 14:04:05 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 14:12:11 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,6 @@ static int	test_max_size(void)
 	std::cerr << v1.max_size() << std::endl;
 	std::cerr << v2.max_size() << std::endl;
 	std::cerr << v3.max_size() << std::endl;
-	
 	return (v1.max_size() + v2.max_size() + v3.max_size());
 }
 
@@ -179,6 +178,38 @@ static int	test_max_size_std(void)
 	return (v1.max_size() + v2.max_size() + v3.max_size());
 }
 
+static int	test_resize(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(42, 21);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	v1.resize(84);
+	v2.resize(10);
+	v3.resize(5);
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl << vtos(v1) << std::endl;
+	std::cerr << v2.size() << "|" << v2.capacity() << std::endl << vtos(v2) << std::endl;
+	std::cerr << v3.size() << "|" << v3.capacity() << std::endl << vtos(v3) << std::endl;
+	return (v1.size() + v2.size() + v3.size());
+}
+
+static int	test_resize_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(42, 21);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	v1.resize(84);
+	v2.resize(10);
+	v3.resize(5);
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl << vtos(v1) << std::endl;
+	std::cerr << v2.size() << "|" << v2.capacity() << std::endl << vtos(v2) << std::endl;
+	std::cerr << v3.size() << "|" << v3.capacity() << std::endl << vtos(v3) << std::endl;
+	return (v1.size() + v2.size() + v3.size());
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -189,6 +220,7 @@ bool	test_vector(void)
 //	ret |= tl("capacity", &test_capacity, &test_capacity_std);
 	ret |= tl("size", &test_size, &test_size_std);
 	ret |= tl("max size", &test_max_size, &test_max_size_std);
+	ret |= tl("resize", &test_resize, &test_resize_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
