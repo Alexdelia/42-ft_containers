@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 13:51:59 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 13:56:24 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	test_constructor_std(void)
 static int	test_v_iterator(void)
 {
 	ft::vector<int>	v1;
-	ft::vector<int>	v2(21, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
 
 	std::cerr << "|";
 	for (ft::reverse_iterator<ft::vector<int>::iterator > i = v1.rbegin();
@@ -96,7 +97,7 @@ static int	test_v_iterator(void)
 			i != v2.rend(); ++i)
 		std::cerr << *i << "|";
 	std::cerr << std::endl << "size: " << v2.size() << std::endl;
-	if (v1.size() != 21)
+	if (v1.size() != 3)
 		return (true);
 
 	return (false);
@@ -105,7 +106,8 @@ static int	test_v_iterator(void)
 static int	test_v_iterator_std(void)
 {
 	std::vector<int>	v1;
-	std::vector<int>	v2(21, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
 
 	std::cerr << "|";
 	for (std::reverse_iterator<std::vector<int>::iterator > i = v1.rbegin();
@@ -120,7 +122,7 @@ static int	test_v_iterator_std(void)
 			i != v2.rend(); ++i)
 		std::cerr << *i << "|";
 	std::cerr << std::endl << "size: " << v2.size() << std::endl;
-	if (v1.size() != 21)
+	if (v1.size() != 3)
 		return (true);
 
 	return (false);
@@ -132,11 +134,10 @@ bool	test_vector(void)
 
 	ret = false;
 	ret |= tl("constructor", &test_constructor, &test_constructor_std);
-	ret |= tl("iterator", &test_v_iterator, &test_v_iterator_std);
+	ret |= tl("reverse iterator", &test_v_iterator, &test_v_iterator_std);
 //	ret |= tl("capacity", &test_capacity, &test_capacity_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
-	return (true); //
 	return (ret);
 }
