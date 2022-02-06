@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 19:05:35 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 11:20:30 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ bool	ts(const std::string &name, bool (*f)(void));
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void));
 
 bool	test_iterator(void);
+bool	test_enable_if_is_integral(void);
 bool	test_vector(void);
 
 #endif
