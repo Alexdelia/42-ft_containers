@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 14:12:11 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 14:16:04 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,20 @@ static int	test_resize(void)
 	int				i[] = {42, 1, -84};
 	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
 
-	v1.resize(84);
+	try
+	{
+		v1.resize(-1);
+		return (true);
+	}
+	catch (std::length_error)
+	{
+		std::cerr << "resize(-1) execption working" << std::endl;
+	}
 	v2.resize(10);
 	v3.resize(5);
 	std::cerr << v1.size() << "|" << v1.capacity() << std::endl << vtos(v1) << std::endl;
 	std::cerr << v2.size() << "|" << v2.capacity() << std::endl << vtos(v2) << std::endl;
-	std::cerr << v3.size() << "|" << v3.capacity() << std::endl << vtos(v3) << std::endl;
+	std::cerr << v3.size() << " |" << v3.capacity() << std::endl << vtos(v3) << std::endl;
 	return (v1.size() + v2.size() + v3.size());
 }
 
@@ -201,12 +209,20 @@ static int	test_resize_std(void)
 	int					i[] = {42, 1, -84};
 	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
 
-	v1.resize(84);
+	try
+	{
+		v1.resize(-1);
+		return (true);
+	}
+	catch (std::length_error)
+	{
+		std::cerr << "resize(-1) execption working" << std::endl;
+	}
 	v2.resize(10);
 	v3.resize(5);
 	std::cerr << v1.size() << "|" << v1.capacity() << std::endl << vtos(v1) << std::endl;
 	std::cerr << v2.size() << "|" << v2.capacity() << std::endl << vtos(v2) << std::endl;
-	std::cerr << v3.size() << "|" << v3.capacity() << std::endl << vtos(v3) << std::endl;
+	std::cerr << v3.size() << " |" << v3.capacity() << std::endl << vtos(v3) << std::endl;
 	return (v1.size() + v2.size() + v3.size());
 }
 
