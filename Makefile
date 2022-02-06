@@ -6,12 +6,11 @@
 #    By: adelille <adelille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 19:21:49 by adelille          #+#    #+#              #
-#    Updated: 2022/02/05 18:30:24 by adelille         ###   ########.fr        #
+#    Updated: 2022/02/06 12:09:38 by adelille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	ft_containers
-LOG =	out.log
 CC = 	clang++
 AR =	ar rcs
 RM = 	rm -rf
@@ -74,9 +73,8 @@ all:		launch $(NAME)
 test:		all
 	@./$(NAME)
 
-log:		all
-	@./$(NAME) 2> $(LOG)
-	@printf "\n$(B)You can find the output of the tests in $(YEL)$(LOG)$(D)\n"
+quiet:		all
+	@./$(NAME) 2> /dev/null
 
 launch:
 	$(call progress_bar)
@@ -93,10 +91,10 @@ clean:
 	@$(RM) $(OBJSPATH)
 
 fclean:		clean
-	@$(RM) $(NAME) $(LOG)
+	@$(RM) $(NAME)
 
 re:			fclean all
 
-.PHONY: all clean fclean re launch test log
+.PHONY: all clean fclean re launch test quiet
 
 # **************************************************************************** #

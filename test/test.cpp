@@ -6,11 +6,14 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:11:59 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 18:21:34 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:09:04 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.hpp"
+
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 {
@@ -18,13 +21,17 @@ bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 	int								ret_std;
 	std::chrono::duration<double>	diff;
 	std::chrono::duration<double>	diff_std;
+	struct winsize					w;
 
-	std::cout << C_BOLD << C_MAGENTA << "\t[" << name << "]" << C_RESET << std::endl;
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	std::cout << C_BOLD << C_MAGENTA << C_DIM << "  [" + name + "]"
+		<< std::string(w.ws_col - 20 - name.size(), ' ') << C_RESET;
+	std::cerr << std::endl;
 	{
 		auto	start = std::chrono::high_resolution_clock::now();
 		ret = f();
 		diff = std::chrono::high_resolution_clock::now() - start;
-		std::cout << C_BOLD << C_CYAN << "  [time:     " << diff.count()
+		std::cerr << C_BOLD << C_CYAN << "  [time:     " << diff.count()
 			<< "s]" << C_RESET << std::endl;
 	}
 	if (f_std)
@@ -32,21 +39,24 @@ bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 		auto	start = std::chrono::high_resolution_clock::now();
 		ret_std = f_std();
 		diff_std = std::chrono::high_resolution_clock::now() - start;
-		std::cout << C_BOLD << C_BLUE << "  [std time: " << diff_std.count()
-			<< "s]" << C_RESET << std::endl;
+		std::cerr << C_BOLD << C_BLUE << "  [std time: " << diff_std.count()
+			<< "s]" << C_RESET << std::endl << "  ";
 		if (ret != ret_std)
 		{
-			std::cout << C_BOLD << C_RED << "[✗]" << C_RESET << std::endl << std::endl;
+			std::cout << C_BOLD << C_RED << "[✗]" << C_RESET << std::endl;
+			std::cerr << std::endl;
 			return (true);
 		}
 		else if (diff.count() > diff_std.count() * 20 /* + 0.1*/)
 		{
-			std::cout << C_BOLD << C_YELLOW << "[⌛]" << C_RESET << std::endl << std::endl;
+			std::cout << C_BOLD << C_YELLOW << "[⌛]" << C_RESET << std::endl;
+			std::cerr << std::endl;
 			return (true);
 		}
 		else
 		{
-			std::cout << C_BOLD << C_GREEN << "[✔]" << C_RESET << std::endl << std::endl;
+			std::cout << C_BOLD << C_GREEN << "[✔]" << C_RESET << std::endl;
+			std::cerr << std::endl;
 			return (false);
 		}
 	}
@@ -58,7 +68,8 @@ bool	ts(const std::string &name, bool (*f)(void))
 	bool	ret;
 
 	std::cout << std::endl << C_BOLD << C_MAGENTA << C_UNDERLINE
-		<< "\t[" << name << "]" << C_RESET << std::endl << std::endl;
+		<< "\t[" << name << "]" << C_RESET << std::endl;
+	std::cerr << std::endl;
 	ret = f();
 	std::cout << C_BOLD <<
 		(ret ? C_RED : C_GREEN) << (ret ? "[KO]" : "[OK]")
