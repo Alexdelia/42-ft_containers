@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:11:59 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 12:18:28 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 13:33:24 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	ts(const std::string &name, bool (*f)(void))
 {
 	bool	ret;
 
-	std::cout << std::endl << C_BOLD << C_MAGENTA << C_UNDERLINE
+	std::cout << std::endl << C_BOLD << C_MAGENTA
 		<< "\t[" << name << "]" << C_RESET << std::endl;
 	std::cerr << std::endl;
 	ret = f();

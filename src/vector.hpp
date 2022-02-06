@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 12:14:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 15:44:08 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/06 13:23:44 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ namespace ft
 						const allocator_type& alloc = allocator_type())
 					: _alloc(alloc), _array(NULL), _size(0), _capacity(0)
 				{
-					reverse(n);
+					reserve(n);
 					_size = n;
 					_capacity = n;
 					for (size_type i = 0; i < n; i++)
