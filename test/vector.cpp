@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 14:18:40 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/07 18:15:00 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,26 @@ static int	test_resize_std(void)
 	return (v1.size() + v2.size() + v3.size());
 }
 
+static int	test_capacity(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(42, 21);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	return (v1.capacity() + v2.capacity() + v3.capacity());
+}
+
+static int	test_capacity_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(42, 21);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	return (v1.capacity() + v2.capacity() + v3.capacity());
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -233,10 +253,10 @@ bool	test_vector(void)
 	ret = false;
 	ret |= tl("constructor", &test_constructor, &test_constructor_std);
 	ret |= tl("reverse iterator", &test_v_iterator, &test_v_iterator_std);
-//	ret |= tl("capacity", &test_capacity, &test_capacity_std);
 	ret |= tl("size", &test_size, &test_size_std);
 	ret |= tl("max size", &test_max_size, &test_max_size_std);
 	ret |= tl("resize", &test_resize, &test_resize_std);
+	ret |= tl("capacity", &test_capacity, &test_capacity_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
