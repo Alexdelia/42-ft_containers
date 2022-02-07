@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/07 22:46:01 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/07 22:51:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,62 @@ static int	test_empty_std(void)
 	return (false);
 }
 
+static int	test_reserve(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(42, 21);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	v1.reserve(21);
+	v2.reserve(21);
+	v3.reserve(21);
+	if (v1.capacity() != 21 && v2.capacity() != 42 && v3.capacity() != 21)
+		return (true);
+
+	v1.reserve(42);
+	v2.reserve(42);
+	v3.reserve(42);
+	if (v1.capacity() != 42 && v2.capacity() != 42 && v3.capacity() != 42)
+		return (true);
+	
+	v1.reserve(1);
+	v2.reserve(1);
+	v3.reserve(1);
+	if (v1.capacity() != 42 && v2.capacity() != 42 && v3.capacity() != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_reserve_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(42, 21);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	v1.reserve(21);
+	v2.reserve(21);
+	v3.reserve(21);
+	if (v1.capacity() != 21 && v2.capacity() != 42 && v3.capacity() != 21)
+		return (true);
+
+	v1.reserve(42);
+	v2.reserve(42);
+	v3.reserve(42);
+	if (v1.capacity() != 42 && v2.capacity() != 42 && v3.capacity() != 42)
+		return (true);
+	
+	v1.reserve(1);
+	v2.reserve(1);
+	v3.reserve(1);
+	if (v1.capacity() != 42 && v2.capacity() != 42 && v3.capacity() != 42)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -292,6 +348,7 @@ bool	test_vector(void)
 	ret |= tl("resize", &test_resize, &test_resize_std);
 	ret |= tl("capacity", &test_capacity, &test_capacity_std);
 	ret |= tl("empty", &test_empty, &test_empty_std);
+	ret |= tl("reserve", &test_reserve, &test_reserve_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
