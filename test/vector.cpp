@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/08 11:34:01 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:33:50 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -526,6 +526,36 @@ static int	test_at_std()
 	return (false);
 }
 
+static int	test_front_back(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(5, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	// std::cerr << v1.front() << "|" << v1.back()
+	std::cerr << "(" << &v1.front() << "|" << &v2.back() << ")" << std::endl;
+	std::cerr << v2.front() << "|" << v2.back() << std::endl;
+	std::cerr << v3.front() << "|" << v3.back() << std::endl;
+
+	return (false);
+}
+
+static int	test_front_back_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(5, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	// std::cerr << v1.front() << "|" << v1.back()
+	std::cerr << "(" << &v1.front() << "|" << &v2.back() << ")" << std::endl;
+	std::cerr << v2.front() << "|" << v2.back() << std::endl;
+	std::cerr << v3.front() << "|" << v3.back() << std::endl;
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -541,6 +571,7 @@ bool	test_vector(void)
 	ret |= tl("reserve", &test_reserve, &test_reserve_std);
 	ret |= tl("access operator", &test_access_operator, &test_access_operator_std);
 	ret |= tl("at", &test_at, &test_at_std);
+	ret |= tl("front back", &test_front_back, &test_front_back_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
