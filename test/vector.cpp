@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/08 11:06:53 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:34:01 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,9 +338,9 @@ static int	test_reserve_std(void)
 
 static int	test_access_operator()
 {
-	std::vector<int>	v1(5, 42);
-	int					i[] = {42, 1, -84};
-	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+	ft::vector<int>	v1(5, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
 
 	if (v2[0] != 42 && v2[1] != 1 && v2[2] != -84)
 		return (true);
@@ -418,6 +418,114 @@ static int	test_access_operator_std()
 	return (false);
 }
 
+static int	test_at()
+{
+	ft::vector<int>	v1(5, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+	ft::vector<int>	v3;
+
+	if (v2.at(0) != 42 && v2.at(1) != 1 && v2.at(2) != -84)
+		return (true);
+	v1.at(0) = 21;
+	if (v1.at(0) != 21)
+		return (true);
+
+	try
+	{
+		v3.at(0);
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+	
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	try
+	{
+		v3.at(100) = 42;
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+	std::cerr << vtos(v1) << std::endl;
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	std::cerr << "|"
+		<< v1.at(0) << "|"
+		<< v1.at(1) << "|"
+		<< v1.at(2) << "|"
+		<< v1.at(3) << "|" << std::endl;
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	try
+	{
+		v3.at(100);
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+
+	return (false);
+}
+
+static int	test_at_std()
+{
+	std::vector<int>	v1(5, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+	std::vector<int>	v3;
+
+	if (v2.at(0) != 42 && v2.at(1) != 1 && v2.at(2) != -84)
+		return (true);
+	v1.at(0) = 21;
+	if (v1.at(0) != 21)
+		return (true);
+
+	try
+	{
+		v3.at(0);
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+	
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	try
+	{
+		v3.at(100) = 42;
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+	std::cerr << vtos(v1) << std::endl;
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	std::cerr << "|"
+		<< v1.at(0) << "|"
+		<< v1.at(1) << "|"
+		<< v1.at(2) << "|"
+		<< v1.at(3) << "|" << std::endl;
+	std::cerr << v1.size() << "|" << v1.capacity() << std::endl;
+	try
+	{
+		v3.at(100);
+		std::cerr << C_RED << "KO" << C_RESET << std::endl;
+	}
+	catch (std::out_of_range &e)
+	{
+		std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	}
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -432,6 +540,7 @@ bool	test_vector(void)
 	ret |= tl("empty", &test_empty, &test_empty_std);
 	ret |= tl("reserve", &test_reserve, &test_reserve_std);
 	ret |= tl("access operator", &test_access_operator, &test_access_operator_std);
+	ret |= tl("at", &test_at, &test_at_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
