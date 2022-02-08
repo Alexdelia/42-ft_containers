@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/08 14:33:50 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:45:25 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -556,6 +556,46 @@ static int	test_front_back_std(void)
 	return (false);
 }
 
+static int	test_assign(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(5, 42);
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.assign(420, 69);
+	if (v1[0] != 69 || v1.size() != 420 || v1.capacity() != 420)
+		return (true);
+	v1.assign(21, 42);
+	if (v1[10] != 42 || v1.size() != 21 || v1.capacity() != 420)
+		return (true);
+	
+	v1.assign(v2.begin(), v2.begin());
+	if (v1.size() != 0 || v1.capacity() != 420)
+		return (true);
+
+	return (false);
+}
+
+static int	test_assign_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(5, 42);
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.assign(420, 69);
+	if (v1[0] != 69 || v1.size() != 420 || v1.capacity() != 420)
+		return (true);
+	v1.assign(21, 42);
+	if (v1[10] != 42 || v1.size() != 21 || v1.capacity() != 420)
+		return (true);
+	
+	v1.assign(v2.begin(), v2.begin());
+	if (v1.size() != 0 || v1.capacity() != 420)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -572,6 +612,7 @@ bool	test_vector(void)
 	ret |= tl("access operator", &test_access_operator, &test_access_operator_std);
 	ret |= tl("at", &test_at, &test_at_std);
 	ret |= tl("front back", &test_front_back, &test_front_back_std);
+	ret |= tl("assign", &test_assign, &test_assign_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
