@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/08 18:45:25 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:04:08 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -596,6 +596,21 @@ static int	test_assign_std(void)
 	return (false);
 }
 
+static int	test_push_back(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(5, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.push_back(i);
+	if (v1[0] != 0 || v1[42] != 42 || v1.size() != 10000 || v1.capacity() != 10000)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -613,6 +628,7 @@ bool	test_vector(void)
 	ret |= tl("at", &test_at, &test_at_std);
 	ret |= tl("front back", &test_front_back, &test_front_back_std);
 	ret |= tl("assign", &test_assign, &test_assign_std);
+	ret |= tl("push back", &test_push_back, &test_push_back_std);
 //	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 
