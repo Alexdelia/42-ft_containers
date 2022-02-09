@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/08 14:33:50 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/08 14:37:35 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -572,8 +572,10 @@ bool	test_vector(void)
 	ret |= tl("access operator", &test_access_operator, &test_access_operator_std);
 	ret |= tl("at", &test_at, &test_at_std);
 	ret |= tl("front back", &test_front_back, &test_front_back_std);
-//	ret |= tl("element access", &test_element access, &test_element access_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
+//	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
+//	ret |= tl("relational operator", NULL, NULL);
+//	ret |= tl("swap", NULL, NULL);
 
 	return (ret);
 }
