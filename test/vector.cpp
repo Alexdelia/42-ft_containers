@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/09 13:38:40 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:49:49 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -642,6 +642,42 @@ static int	test_push_back_std(void)
 	return (false);
 }
 
+static int	test_pop_back(void)
+{
+	ft::vector<int>	v1(10000, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.pop_back();
+	if (v1[0] || v1.size() != 0 || v1.capacity() != 10000)
+		return (true);
+
+	v2.pop_back();
+	if (v2[0] != 42 || v2[1] != 1 || v2[2] || v2.size() != 2 || v1.capacity() != 3)
+		return (true);
+	
+	return (false);
+}
+
+static int	test_pop_back_std(void)
+{
+	std::vector<int>	v1(10000, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.pop_back();
+	if (v1[0] || v1.size() != 0 || v1.capacity() != 10000)
+		return (true);
+
+	v2.pop_back();
+	if (v2[0] != 42 || v2[1] != 1 || v2[2] || v2.size() != 2 || v1.capacity() != 3)
+		return (true);
+	
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -660,7 +696,7 @@ bool	test_vector(void)
 	ret |= tl("front back", &test_front_back, &test_front_back_std);
 	ret |= tl("assign", &test_assign, &test_assign_std);
 	ret |= tl("push back", &test_push_back, &test_push_back_std);
-//	ret |= tl("element access", &test_element access, &test_element access_std);
+	ret |= tl("pop back", &test_pop_back, &test_pop_back_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 //	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
 //	ret |= tl("relational operator", NULL, NULL);
