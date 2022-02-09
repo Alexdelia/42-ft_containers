@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/09 13:49:49 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:50:36 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -678,6 +678,72 @@ static int	test_pop_back_std(void)
 	return (false);
 }
 
+static int	test_insert(void)
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(5, 42);
+
+	for (size_t i = 0; i < 100; i++)
+		v2.insert(v2.begin() + 3, i);
+	if (v2[2] != 42 || v2[3] != 99 || *(v2.end() - 1) != 42
+			|| v2.size() != 105 || v2.capacity() != 160)
+		return (true);
+	v1.insert(v1.begin(), 42);
+	if (v1[0] != 42 || v1.size() != 1 || v1.capacity() != 1)
+		return (true);
+
+	return (false);
+}
+
+static int	test_insert_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(5, 42);
+
+	for (size_t i = 0; i < 100; i++)
+		v2.insert(v2.begin() + 3, i);
+	if (v2[2] != 42 || v2[3] != 99 || *(v2.end() - 1) != 42
+			|| v2.size() != 105 || v2.capacity() != 160)
+		return (true);
+	v1.insert(v1.begin(), 42);
+	if (v1[0] != 42 || v1.size() != 1 || v1.capacity() != 1)
+		return (true);
+
+	return (false);
+}
+
+static int	test_erase(void)
+{
+	ft::vector<int>	v1(5, 42);
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	v1.erase(v1.begin());
+	if (v1.size() != 4 || v1.capacity() != 5)
+		return (true);
+	v2.erase(v2.begin() + 1);
+	if (v2[1] != -84 || v2.size() != 2 || v2.capacity() != 3)
+		return (true);
+
+	return (false);
+}
+
+static int	test_erase_std(void)
+{
+	std::vector<int>	v1(5, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	v1.erase(v1.begin());
+	if (v1.size() != 4 || v1.capacity() != 5)
+		return (true);
+	v2.erase(v2.begin() + 1);
+	if (v2[1] != -84 || v2.size() != 2 || v2.capacity() != 3)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -697,6 +763,8 @@ bool	test_vector(void)
 	ret |= tl("assign", &test_assign, &test_assign_std);
 	ret |= tl("push back", &test_push_back, &test_push_back_std);
 	ret |= tl("pop back", &test_pop_back, &test_pop_back_std);
+	ret |= tl("insert", &test_insert, &test_insert_std);
+	ret |= tl("erase", &test_erase, &test_erase_std);
 //	ret |= tl("modifier", &test_modifier, &test_modifier_std);
 //	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
 //	ret |= tl("relational operator", NULL, NULL);
