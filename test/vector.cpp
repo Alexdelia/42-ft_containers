@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/09 13:27:35 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:38:40 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -606,6 +606,37 @@ static int	test_push_back(void)
 	for (size_t i = 0; i < 10000; i++)
 		v1.push_back(i);
 	if (v1[0] != 0 || v1[42] != 42 || v1.size() != 10000 || v1.capacity() != 10000)
+		return (true);
+
+	v2.push_back(21);
+	if (v2[2] != 21 || v2.size() != 3 || v2.capacity() != 3)
+		return (true);
+	
+	v3.push_back(-21);
+	if (v3[3] != -21 || v3.size() != 4 || v3.capacity() != 4)
+		return (true);
+
+	return (false);
+}
+
+static int	test_push_back_std(void)
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(5, 42);
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v3(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v1.push_back(i);
+	if (v1[0] != 0 || v1[42] != 42 || v1.size() != 10000 || v1.capacity() != 10000)
+		return (true);
+
+	v2.push_back(21);
+	if (v2[2] != 21 || v2.size() != 3 || v2.capacity() != 3)
+		return (true);
+	
+	v3.push_back(-21);
+	if (v3[3] != -21 || v3.size() != 4 || v3.capacity() != 4)
 		return (true);
 
 	return (false);
