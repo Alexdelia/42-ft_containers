@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/10 12:02:12 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:16:45 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -810,6 +810,98 @@ static int	test_clear_std(void)
 	return (false);
 }
 
+static int	test_get_allocator(void)
+{
+	ft::vector<int>							v1;
+	ft::vector<std::string>					v2;
+	ft::vector<int>::allocator_type			alloc1 = v1.get_allocator();
+	ft::vector<std::string>::allocator_type	alloc2 = v2.get_allocator();
+	int										*p1 = alloc1.allocate(1);
+	std::string								*p2 = alloc2.allocate(1);
+	
+	alloc1.construct(p1, 42);
+	alloc2.construct(p2, "42");
+	if (*p1 != 42 || *p2 != "42")
+		return (true);
+	alloc1.destroy(p1);
+	alloc2.destroy(p2);
+	alloc1.deallocate(p1, 1);
+	alloc2.deallocate(p2, 1);
+
+	return (false);
+}
+
+static int	test_get_allocator_std(void)
+{
+	std::vector<int>							v1;
+	std::vector<std::string>					v2;
+	std::vector<int>::allocator_type			alloc1 = v1.get_allocator();
+	std::vector<std::string>::allocator_type	alloc2 = v2.get_allocator();
+	int											*p1 = alloc1.allocate(1);
+	std::string									*p2 = alloc2.allocate(1);
+	
+	alloc1.construct(p1, 42);
+	alloc2.construct(p2, "42");
+	if (*p1 != 42 || *p2 != "42")
+		return (true);
+	alloc1.destroy(p1);
+	alloc2.destroy(p2);
+	alloc1.deallocate(p1, 1);
+	alloc2.deallocate(p2, 1);
+
+	return (false);
+}
+
+static int	test_relational_operators()
+{
+	ft::vector<int>	v1;
+	ft::vector<int>	v2(5, 42);
+	ft::vector<int>	v3(5, 42);
+	ft::vector<int>	v4(21, -84);
+
+	if ((v1 == v2) || !(v2 == v3) || (v3 == v4))
+		return (1);
+	if (!(v1 != v2) || (v2 != v3) || !(v3 != v4))
+		return (2);
+	if (!(v1 < v2) || (v2 < v3) || (v3 < v4))
+		return (3);
+	if (!(v1 <= v2) || !(v2 <= v3) || (v3 <= v4))
+		return (4);
+	if ((v1 > v2) || (v2 > v3) || !(v3 > v4))
+		return (5);
+	if ((v1 >= v2) || !(v2 >= v3) || !(v3 >= v4))
+		return (6);
+
+	std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+	
+	return (false);
+}
+
+static int	test_relational_operators_std()
+{
+	std::vector<int>	v1;
+	std::vector<int>	v2(5, 42);
+	std::vector<int>	v3(5, 42);
+	std::vector<int>	v4(21, -84);
+
+	if ((v1 == v2) || !(v2 == v3) || (v3 == v4))
+		return (1);
+	if (!(v1 != v2) || (v2 != v3) || !(v3 != v4))
+		return (2);
+	if (!(v1 < v2) || (v2 < v3) || (v3 < v4))
+		return (3);
+	if (!(v1 <= v2) || !(v2 <= v3) || (v3 <= v4))
+		return (4);
+	if ((v1 > v2) || (v2 > v3) || !(v3 > v4))
+		return (5);
+	if ((v1 >= v2) || !(v2 >= v3) || !(v3 >= v4))
+		return (6);
+	
+	std::cerr << C_GREEN << "OK" << C_RESET << std::endl;
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -833,8 +925,9 @@ bool	test_vector(void)
 	ret |= tl("erase", &test_erase, &test_erase_std);
 	ret |= tl("swap", &test_swap, &test_swap_std);
 	ret |= tl("clear", &test_clear, &test_clear_std);
-//	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
-//	ret |= tl("relational operator", NULL, NULL);
+	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
+	ret |= tl("relational operators", &test_relational_operators,
+			test_relational_operators_std);
 //	ret |= tl("swap", NULL, NULL);
 
 	return (ret);
