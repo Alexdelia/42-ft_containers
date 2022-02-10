@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/09 18:50:36 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:02:12 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -744,6 +744,72 @@ static int	test_erase_std(void)
 	return (false);
 }
 
+static int	test_swap(void)
+{
+	ft::vector<int>	v1;
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v2.swap(v1);
+	if (v1.size() != 0)
+		return (true);
+	v2.swap(v1);
+	if (v1.size() != 3 || v1[0] != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_swap_std(void)
+{
+	std::vector<int>	v1;
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		v2.swap(v1);
+	if (v1.size() != 0)
+		return (true);
+	v2.swap(v1);
+	if (v1.size() != 3 || v1[0] != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_clear(void)
+{
+	ft::vector<int>	v1;
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	v1.clear();
+	if (v1.size() != 0 || v1.capacity() != 0)
+		return (true);
+	v2.clear();
+	if (v2.size() != 0 || v2.capacity() != 3)
+		return (true);
+
+	return (false);
+}
+
+static int	test_clear_std(void)
+{
+	std::vector<int>	v1;
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	v1.clear();
+	if (v1.size() != 0 || v1.capacity() != 0)
+		return (true);
+	v2.clear();
+	if (v2.size() != 0 || v2.capacity() != 3)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -765,7 +831,8 @@ bool	test_vector(void)
 	ret |= tl("pop back", &test_pop_back, &test_pop_back_std);
 	ret |= tl("insert", &test_insert, &test_insert_std);
 	ret |= tl("erase", &test_erase, &test_erase_std);
-//	ret |= tl("modifier", &test_modifier, &test_modifier_std);
+	ret |= tl("swap", &test_swap, &test_swap_std);
+	ret |= tl("clear", &test_clear, &test_clear_std);
 //	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
 //	ret |= tl("relational operator", NULL, NULL);
 //	ret |= tl("swap", NULL, NULL);
