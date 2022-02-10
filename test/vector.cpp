@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:20:48 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/10 12:16:45 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:23:07 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -902,6 +902,40 @@ static int	test_relational_operators_std()
 	return (false);
 }
 
+static int	test_n_swap(void)
+{
+	ft::vector<int>	v1;
+	int				i[] = {42, 1, -84};
+	ft::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		ft::swap(v1, v2);
+	if (v1.size() != 0)
+		return (true);
+	ft::swap(v1, v2);
+	if (v1.size() != 3 || v1[0] != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_n_swap_std(void)
+{
+	std::vector<int>	v1;
+	int					i[] = {42, 1, -84};
+	std::vector<int>	v2(i, i + sizeof(i) / sizeof(int));
+
+	for (size_t i = 0; i < 10000; i++)
+		std::swap(v1, v2);
+	if (v1.size() != 0)
+		return (true);
+	std::swap(v1, v2);
+	if (v1.size() != 3 || v1[0] != 42)
+		return (true);
+
+	return (false);
+}
+
 bool	test_vector(void)
 {
 	bool	ret;
@@ -928,7 +962,7 @@ bool	test_vector(void)
 	ret |= tl("get allocator", &test_get_allocator, &test_get_allocator_std);
 	ret |= tl("relational operators", &test_relational_operators,
 			test_relational_operators_std);
-//	ret |= tl("swap", NULL, NULL);
+	ret |= tl("swap", &test_n_swap, &test_n_swap_std);
 
 	return (ret);
 }
