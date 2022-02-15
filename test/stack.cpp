@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 13:28:29 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/15 15:25:13 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/15 16:40:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,58 @@ static int	test_oc_std(void)
 	return (false);
 }
 
+static int	test_ro(void)
+{
+	ft::stack<int>	s1;
+	ft::stack<int>	s2;
+	ft::stack<int>	s3;
+	ft::stack<int>	s4;
+
+	FOR(10)
+		s1.push(i);
+	FOR(10)
+		s2.push(i);
+	FOR(10)
+		s3.push(3);
+	FOR(10)
+		s4.push(4);
+
+	if (!(s1 == s2) || !(s1 >= s2) || !(s1 <= s2) || (s1 != s2))
+		return (true);
+	if (!(s1 != s3) || (s1 > s3) || (s1 >= s3))
+		return (true);
+	if (!(s1 < s4) || !(s1 <= s4))
+		return (true);
+
+	return (false);
+}
+
+static int	test_ro_std(void)
+{
+	std::stack<int>	s1;
+	std::stack<int>	s2;
+	std::stack<int>	s3;
+	std::stack<int>	s4;
+
+	FOR(10)
+		s1.push(i);
+	FOR(10)
+		s2.push(i);
+	FOR(10)
+		s3.push(3);
+	FOR(10)
+		s4.push(4);
+
+	if (!(s1 == s2) || !(s1 >= s2) || !(s1 <= s2) || (s1 != s2))
+		return (true);
+	if (!(s1 != s3) || (s1 > s3) || (s1 >= s3))
+		return (true);
+	if (!(s1 < s4) || !(s1 <= s4))
+		return (true);
+
+	return (false);
+}
+
 bool	test_stack(void)
 {
 	bool	ret;
@@ -109,7 +161,7 @@ bool	test_stack(void)
 	ret = false;
 	ret |= tl("push, pop, empty, size, top", &test_ppest, test_ppest_std);
 	ret |= tl("other container", &test_oc, &test_oc_std);
-	//ret |= tl("relational operator", NULL, NULL);
+	ret |= tl("relational operator", &test_ro, &test_ro_std);
 
 	return (ret);
 }
