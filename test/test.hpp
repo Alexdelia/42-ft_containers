@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 13:26:52 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:18:17 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@
 //# include <iomanip>
 
 # include <vector>
+# include <stack>
 
 # include "../src/random_access_iterator.hpp"
 # include "../src/reverse_iterator.hpp"
 # include "../src/iterator_traits.hpp"
 # include "../src/vector.hpp"
+# include "../src/stack.hpp"
+
+# define FOR(x)	for (size_t i = 0; i < x; ++i)
 
 bool	ts(const std::string &name, bool (*f)(void));
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void));
@@ -36,5 +40,6 @@ bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void));
 bool	test_iterator(void);
 bool	test_enable_if_is_integral(void);
 bool	test_vector(void);
+bool	test_stack(void);
 
 #endif
