@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/15 15:18:17 by adelille         ###   ########.fr       */
+/*   Updated: 2022/02/16 10:44:12 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include "../src/iterator_traits.hpp"
 # include "../src/vector.hpp"
 # include "../src/stack.hpp"
+# include "../src/pair.hpp"
 
 # define FOR(x)	for (size_t i = 0; i < x; ++i)
 
@@ -41,5 +42,6 @@ bool	test_iterator(void);
 bool	test_enable_if_is_integral(void);
 bool	test_vector(void);
 bool	test_stack(void);
+bool	test_pair(void);
 
 #endif
