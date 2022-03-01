@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 10:48:44 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/28 19:25:02 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/01 14:22:57 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,76 @@ namespace ft
 				}
 
 			private:
-				//
+				node	*_new_node(value_type const &data)
+				{
+					node	*node = _alloc.allocate(1);
+
+					_alloc.construct(node, data);
+					node->color = RED;
+					node->left = node->right = NIL;
+					node->parent = NIL;
+					return (node);
+				}
+
+				node_ptr	_grand_parent(node_ptr const node) const
+				{
+					node_ptr	grand_parent = node->parent->parent;
+
+					return (grand_parent);
+				}
+
+				node_ptr	_sibling(node_ptr const node) const
+				{
+					node_ptr	parent = node->parent;
+
+					if (node == parent->left)
+						return (parent->right);
+					else
+						return (parent->left);
+				}
+
+				node_ptr	_uncle(node_ptr const node) const
+				{
+					node_ptr	grand_parent = _grand_parent(node);
+
+					return (_sibling(grand_parent));
+				}
+
+				void	_rotate_left(node_ptr x)
+				{
+					node_ptr	y = x->right;
+
+					x->right = y->left;
+					if (y->left != NIL)
+						y->left->parent = x;
+					y->parent = x->parent;
+					if (x->parent == NIL)
+						root = y;
+					else if (x == x->parent->left)
+						x->parent->left = y;
+					else
+						x->parent->right = y;
+					y->left = x;
+					x->parent = y;
+				}
+
+				void	_rotate_right(node_ptr x)
+				{
+					node_ptr	y = x->left;
+
+					x->left = y->right;
+					if (y->right != NIL)
+						y->right->parent = x;
+					y->parent = x->parent;
+					if (x->parent == NIL)
+						root = y;
+					else if (x == x->parent->right)
+						x->parent->right = y;
+					else
+						x->parent->left = y;
+					y->right = x;
+					x->parent = y;
+				}
 
 		};
 }
