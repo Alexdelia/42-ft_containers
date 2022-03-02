@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 10:48:44 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/01 14:22:57 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/02 15:12:00 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,6 +381,293 @@ namespace ft
 					x->parent = y;
 				}
 
+				ft::pair<node_ptr, bool>	_insert_recursive(node_ptr root, node_ptr n)
+				{
+					if (root != NIL && _compare(n->data, root->data))
+					{
+						if (root->left != NIL)
+							return (_insert_recursive(root->left, n));
+						else
+							root->left = n;
+					}
+					else if (root != NIL && _compare(root->data, n->data))
+					{
+						if (root->right != NIL)
+							return (_insert_recursive(root->right, n));
+						else
+							root->right = n;
+					}
+					else if (root != NIL)
+						return (ft::make_pair(root, false));
+					n->parent = root;
+					n->color = RED;
+					n->left = n->right = NIL;
+					return (ft::make_pair(n, true));
+				}
+
+				void	_insert_fixup(node_ptr k)
+				{
+					node_ptr	u;
+
+					while (k->parent->color == RED)
+					{
+						if (k->parent == k->parent->parent->right)
+						{
+							u = k->parent->parent->left;
+							if (u->color == RED)
+							{
+								u->color = BLACK;
+								k->parent->color = BLACK;
+								k->parent->parent->color = RED;
+								k = k->parent->parent;
+							}
+							else
+							{
+								if (k == k->parent->left)
+								{
+									k = k->parent;
+									_rotate_right(k);
+								}
+								k->parent->color = BLACK;
+								k->parent->parent->color = RED;
+								_rotate_left(k->parent->parent);
+							}
+						}
+						else
+						{
+							u = k->parent->parent->right;
+
+							if (u->color == RED)
+							{
+								u->color = BLACK;
+								k->parent->color = BLACK;
+								k->parent->parent->color = RED;
+								k = k->parent->parent;
+							}
+							else
+							{
+								if (k == k->parent->right)
+								{
+									k = k->parent;
+									_rotate_left(k);
+								}
+								k->parent->color = BLACK;
+								k->parent->parent->color = RED;
+								_rotate_right(k->parent->parent);
+							}
+						}
+						if (k == root)
+							break ;
+					}
+					root->color = BLACK;
+				}
+
+				node_ptr	_find_node(value_type const &data) const
+				{
+					node_ptr	current = root;
+
+					while (current != NIL)
+					{
+						if (_compare(data, current->data))
+							current = current->left;
+						else if (_compare(current->data, data))
+							current = current->right;
+						else
+							return (current);
+					}
+					return (NULL);
+				}
+
+				void	_transplant(node_ptr u, node_ptr v)
+				{
+					if (u->parent == NIL)
+						root = v;
+					else if (u == u->parent->left)
+						u->parent->left = v;
+					else
+						u->parent->right = v;
+					v->parent = u->parent;
+				}
+
+				node_ptr	_minimum(node_ptr x) const
+				{
+					while (x->left != NIL)
+						x = x->left;
+					return (x);
+				}
+				node_ptr	_maximum(node_ptr x) const
+				{
+					while (x->right != NIL)
+						x = x->right;
+					return (x);
+				}
+
+				void	_delete_node(node_ptr z)
+				{
+					node_ptr	y = z;
+					node_ptr	x;
+					bool		y_original_color = y->color;
+
+					if (z->left == NIL)
+					{
+						x = z->right;
+						_transplant(z, z->right);
+					}
+					else if (z->right == NIL)
+					{
+						x = z->left;
+						_transplant(z, z->left);
+					}
+					else
+					{
+						y = _minimum(z->right);
+						y_original_color = y->color;
+						x = y->right;
+						if (y->parent == z)
+							x->parent = y;
+						else
+						{
+							_transplant(y, y->right);
+							y->right = z->right;
+							y->right->parent = y;
+						}
+						_transplant(z, y);
+						y->left = z->left;
+						y->left->parent = y;
+						y->color = z->color;
+					}
+					_alloc.destroy(z);
+					_alloc.deallocate(z, 1);
+					_size--;
+					if (y_original_color == BLACK)
+						_delete_fixup(x);
+				}
+
+				void	_delete_fixup(node_ptr x)
+				{
+					node_ptr	s;
+
+					while (x != root && x->color == BLACK)
+					{
+						if (x == x->parent->left)
+						{
+							s = x->parent->right;
+							if (s->color == RED)
+							{
+								s->color = BLACK;
+								x->parent->color = RED;
+								_rotate_left(x->parent);
+								s = x->parent->right;
+							}
+							if (s->left->color == BLACK && s->right->color == BLACK)
+							{
+								s->color = RED;
+								x = x->parent;
+							}
+							else
+							{
+								if (s->right->color == BLACK)
+								{
+									s->left->color = BLACK;
+									s->color = RED;
+									_rotate_right(s);
+									s = x->parent->right;
+								}
+								s->color = x->parent->color;
+								x->parent->color = BLACK;
+								s->right->color = BLACK;
+								_rotate_left(x->parent);
+								x = root;
+							}
+						}
+						else
+						{
+							s = x->parent->left;
+							if (s->color == RED)
+							{
+								s->color = BLACK;
+								x->parent->color = RED;
+								_rotate_right(x->parent);
+								s = x->parent->left;
+							}
+							if (s->right->color == BLACK && s->left->color == BLACK)
+							{
+								s->color = RED;
+								x = x->parent;
+							}
+							else
+							{
+								if (s->left->color == BLACK)
+								{
+									s->right->color = BLACK;
+									s->color = RED;
+									_rotate_left(s);
+									s = x->parent->left;
+								}
+								s->color = x->parent->color;
+								x->parent->color = BLACK;
+								s->left->color = BLACK;
+								_rotate_right(x->parent);
+								x = root;
+							}
+						}
+					}
+					x->color = BLACK;
+				}
+
+				void	_recursive_clear(node_ptr x = NULL)
+				{
+					if (x == NULL)
+						x = root;
+					if (x != NIL)
+					{
+						_recursive_clear(x->left);
+						_recursive_clear(x->right);
+						_alloc.destroy(x);
+						_alloc.deallocate(x, 1);
+					}
+				}
+
+				void	_recursive_copy(_rb_tree &dst, node_ptr x, node_ptr x_nil)
+				{
+					if (x != x_nil)
+					{
+						_recursive_copy(dst, x->left, x_nil);
+						dst.insert(x->data);
+						_recursive_copy(dst, x->right, x_nil);
+					}
+				}
+
+				node_ptr	_prev(node_ptr node) const
+				{
+					node_ptr	prev = NIL;
+
+					if (node->left != NIL)
+						return (_minimum(node->left));
+					prev = node->parent;
+					while (prev != NIL && node == prev->left)
+					{
+						node = prev;
+						prev = prev->parent;
+					}
+					return (prev);
+				}
+
+				node_ptr	_next(node_ptr node) const
+				{
+					node_ptr	next = NIL;
+
+					if (node->right != NIL)
+						return (_minimum(node->right));
+
+					next = node->parent;
+					while (next != NIL && node == next->right)
+					{
+						node = next;
+						next = next->parent;
+					}
+					return (next);
+				}
 		};
 }
 
