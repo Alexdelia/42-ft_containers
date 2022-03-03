@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 10:48:44 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/17 11:15:15 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:32:04 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ namespace ft
 				typedef data_type								const *const_pointer;
 				typedef typename std::ptrdiff_t					difference_type;
 				typedef std::bidirectional_iterator_tag			iterator_category;
+			
+			public:
+				node_ptr	node;
 
 			private:
 				node_ptr _root;
 				node_ptr _NIL;
 
 			public:
-				node_ptr	node;
-
 				tree_iterator(node_ptr node, node_ptr root, node_ptr NIL)
 					: node(node), _root(root), _NIL(NIL) {}
 				tree_iterator(void) : node(NULL), _root(NULL), _NIL(NULL) {}

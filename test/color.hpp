@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 19:01:01 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/05 16:23:10 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:29:31 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define C_WHITE	"\033[37m"
 # define C_GRAY		"\033[90m"
 
-# define BWHI	"\033[1;37m"
+/*# define BWHI	"\033[1;37m"
 # define MAG	"\033[0;35m"
 # define BMAG	"\033[1;35m"
 # define IMAG	"\033[3;35m"
@@ -41,6 +41,6 @@
 # define RED	"\033[1;31m"
 # define GRN	"\033[1;32m"
 # define SBLU	"\033[5;3;34m"
-# define DEF	"\033[0m"
+# define DEF	"\033[0m"*/
 
 #endif

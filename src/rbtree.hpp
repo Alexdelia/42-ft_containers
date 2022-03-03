@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 10:48:44 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/02 15:12:00 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:42:09 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ namespace ft
 					NIL->color = BLACK;
 
 					root = NIL;
-					other.print();
+					//other.print();
 					_recursive_copy(*this, other.root, other.NIL);
 				}
 
