@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:52:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/03 18:32:32 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:26:53 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(void)
 	ret |= ts("stack", &test_stack);
 	ret |= ts("pair", &test_pair);
 	ret |= ts("rbtree", &test_rbtree);
+	ret |= ts("map", &test_map);
 
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/03 18:33:01 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/05 21:36:08 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # include <vector>
 # include <stack>
+# include <map>
 
 # include "../src/random_access_iterator.hpp"
 # include "../src/reverse_iterator.hpp"
@@ -33,6 +34,7 @@
 # include "../src/stack.hpp"
 # include "../src/pair.hpp"
 # include "../src/rbtree.hpp"
+# include "../src/map.hpp"
 
 # define FOR(x)	for (size_t i = 0; i < x; ++i)
 
@@ -45,5 +47,6 @@ bool	test_vector(void);
 bool	test_stack(void);
 bool	test_pair(void);
 bool	test_rbtree(void);
+bool	test_map(void);
 
 #endif
