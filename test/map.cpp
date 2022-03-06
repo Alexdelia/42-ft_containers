@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 21:26:10 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/06 12:00:53 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/06 12:05:53 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,46 @@ static int	test_insert_std(void)
 	return (false);
 }
 
+static int	test_assign(void)
+{
+	ft::map<std::string, int>	m1;
+	ft::map<std::string, int>	m2;
+
+	m1 = m2;
+	std::cerr << mtos(m1) << std::endl;
+	if (m1.size() != 0 || m1.empty() != true)
+		return (false);
+
+	m1.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m1.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m2 = m1;
+	std::cerr << mtos(m2) << std::endl;
+	if (m1.size() != 2 || m1.empty() != false)
+		return (false);
+
+	return (false);
+}
+
+static int	test_assign_std(void)
+{
+	std::map<std::string, int> m1;
+	std::map<std::string, int> m2;
+
+	m1 = m2;
+	std::cerr << mtos(m1) << std::endl;
+	if (m1.size() != 0 || m1.empty() != true)
+		return (false);
+
+	m1.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m1.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m2 = m1;
+	std::cerr << mtos(m2) << std::endl;
+	if (m1.size() != 2 || m1.empty() != false)
+		return (false);
+
+	return (false);
+}
+
 bool	test_map(void)
 {
 	bool	ret;
@@ -245,6 +285,7 @@ bool	test_map(void)
 	ret = false;
 	ret |= tl("basic", &test_basic, &test_basic_std);
 	ret |= tl("insert", &test_insert, &test_insert_std);
+	ret |= tl("assign", &test_assign, &test_assign_std);
 
 	return (ret);
 }
