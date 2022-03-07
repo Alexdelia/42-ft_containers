@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:05:03 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/05 21:36:08 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:43:25 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@
 # include "../src/map.hpp"
 
 # define FOR(x)	for (size_t i = 0; i < x; ++i)
+
+# ifndef TEST_SIZE
+#  define TEST_SIZE	100000
+# endif
 
 bool	ts(const std::string &name, bool (*f)(void));
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void));

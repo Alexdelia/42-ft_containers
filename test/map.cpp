@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 21:26:10 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/06 22:23:12 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/07 13:52:31 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,13 +175,13 @@ static int	test_insert(void)
 	if (m2.size() != 4 || m2.empty() != false)
 		return (true);
 
-	FOR(100000)
+	FOR(TEST_SIZE)
 	{
 		std::ostringstream	ss;
 		ss << "str" << i;
 		m3.insert(ft::make_pair(ss.str(), (int)i));
 	}
-	if (m3.size() != 100000 || m3.empty() != false)
+	if (m3.size() != TEST_SIZE || m3.empty() != false)
 		return (true);
 	
 	return (false);
@@ -226,13 +226,13 @@ static int	test_insert_std(void)
 	if (m2.size() != 4 || m2.empty() != false)
 		return (true);
 
-	FOR(100000)
+	FOR(TEST_SIZE)
 	{
 		std::ostringstream	ss;
 		ss << "str" << i;
 		m3.insert(std::make_pair(ss.str(), (int)i));
 	}
-	if (m3.size() != 100000 || m3.empty() != false)
+	if (m3.size() != TEST_SIZE || m3.empty() != false)
 		return (true);
 	
 	return (false);
@@ -546,6 +546,244 @@ static int	test_at_std(void)
 	return (false);
 }
 
+static int	test_clear(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.clear();
+	std::cerr << mtos(m);
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+	
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+	
+	m.clear();
+	std::cerr << mtos(m);
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_clear_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.clear();
+	std::cerr << mtos(m);
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+	
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+	
+	m.clear();
+	std::cerr << mtos(m);
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_erase(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.erase("no") != false)
+		return (true);
+	if (m.size() != 5)
+		return (true);
+
+	if (m.erase("str1") != true
+			|| m.erase("str2") != true
+			|| m.erase("weird") != true)
+		return (true);
+	if (m.size() != 2)
+		return (true);
+
+	m.clear();
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	ft::map<std::string, int>::iterator i = m.begin();
+	m.erase(i);
+	std::cerr << mtos(m) << std::endl;
+	i = m.begin();
+	i++;
+	m.erase(i);
+	std::cerr << mtos(m) << std::endl;
+
+	m.erase(m.begin(), m.end());
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	FOR(TEST_SIZE)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m.size() != TEST_SIZE)
+		return (true);
+
+	FOR(TEST_SIZE)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m.erase(ss.str());
+	}
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_erase_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.erase("no") != false)
+		return (true);
+	if (m.size() != 5)
+		return (true);
+
+	if (m.erase("str1") != true
+			|| m.erase("str2") != true
+			|| m.erase("weird") != true)
+		return (true);
+	if (m.size() != 2)
+		return (true);
+
+	m.clear();
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	std::map<std::string, int>::iterator i = m.begin();
+	m.erase(i);
+	std::cerr << mtos(m) << std::endl;
+	i = m.begin();
+	i++;
+	m.erase(i);
+	std::cerr << mtos(m) << std::endl;
+
+	m.erase(m.begin(), m.end());
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	FOR(TEST_SIZE)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m.size() != TEST_SIZE)
+		return (true);
+
+	FOR(TEST_SIZE)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m.erase(ss.str());
+	}
+	if (m.size() != 0 || m.empty() != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_swap(void)
+{
+	ft::map<std::string, int>	m1;
+	ft::map<std::string, int>	m2;
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 42)
+		return (true);
+
+	FOR(69)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m2.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 69)
+		return (true);
+
+	m1.swap(m2);
+	if (m1.size() != 69)
+		return (true);
+	if (m2.size() != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_swap_std(void)
+{
+	std::map<std::string, int>	m1;
+	std::map<std::string, int>	m2;
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 42)
+		return (true);
+
+	FOR(69)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m2.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 69)
+		return (true);
+
+	m1.swap(m2);
+	if (m1.size() != 69)
+		return (true);
+	if (m2.size() != 42)
+		return (true);
+
+	return (false);
+}
+
 bool	test_map(void)
 {
 	bool	ret;
@@ -558,6 +796,9 @@ bool	test_map(void)
 	ret |= tl("size related", &test_size, &test_size_std);
 	ret |= tl("access", &test_access, &test_access_std);
 	ret |= tl("at", &test_at, &test_at_std);
+	ret |= tl("clear", &test_clear, &test_clear_std);
+	ret |= tl("erase", &test_erase, &test_erase_std);
+	ret |= tl("swap", &test_swap, &test_swap_std);
 
 	return (ret);
 }
