@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 21:26:10 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/07 13:52:31 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/07 18:20:31 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -627,7 +627,7 @@ static int	test_erase(void)
 	m.erase(i);
 	std::cerr << mtos(m) << std::endl;
 	i = m.begin();
-	i++;
+	++i;
 	m.erase(i);
 	std::cerr << mtos(m) << std::endl;
 
