@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 21:26:10 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/07 18:20:31 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/07 19:55:18 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -784,6 +784,194 @@ static int	test_swap_std(void)
 	return (false);
 }
 
+static int	test_count(void)
+{
+	ft::map<std::string, int>	m;
+	
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.count("str1") != true
+			|| m.count("str2") != true
+			|| m.count("weird") != true
+			|| m.count("strange") != true
+			|| m.count("first") != true)
+		return (true);
+	if (m.count("no") != false)
+		return (true);
+
+	return (false);
+}
+
+static int	test_count_std(void)
+{
+	std::map<std::string, int>	m;
+	
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.count("str1") != true
+			|| m.count("str2") != true
+			|| m.count("weird") != true
+			|| m.count("strange") != true
+			|| m.count("first") != true)
+		return (true);
+	if (m.count("no") != false)
+		return (true);
+
+	return (false);
+}
+
+static int	test_find(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.find("str1")->second != 42
+			|| m.find("str2")->second != -21
+			|| m.find("weird")->second != 84
+			|| m.find("strange")->second != 0
+			|| m.find("first")->second != 69)
+		return (true);
+	if (m.find("no") != m.end())
+		return (true);
+
+	return (false);
+}
+
+static int	test_find_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.find("str1")->second != 42
+			|| m.find("str2")->second != -21
+			|| m.find("weird")->second != 84
+			|| m.find("strange")->second != 0
+			|| m.find("first")->second != 69)
+		return (true);
+	if (m.find("no") != m.end())
+		return (true);
+
+	return (false);
+}
+
+static int	test_kv_comp(void)
+{
+	ft::map<std::string, int>					m;
+	ft::map<std::string, int>::key_compare		key_comp = m.key_comp();
+	ft::map<std::string, int>::value_compare	value_comp = m.value_comp();
+
+	if (key_comp("str1", "str1") != false)
+		return (true);
+	if (key_comp("str1", "str2") != true)
+		return (true);
+
+	ft::pair<std::string, int>	p1(std::string("str1"), 1);
+	ft::pair<std::string, int>	p2(std::string("str2"), 2);
+
+	if (value_comp(p1, p2) != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_kv_comp_std(void)
+{
+	std::map<std::string, int>					m;
+	std::map<std::string, int>::key_compare		key_comp = m.key_comp();
+	std::map<std::string, int>::value_compare	value_comp = m.value_comp();
+
+	if (key_comp("str1", "str1") != false)
+		return (true);
+	if (key_comp("str1", "str2") != true)
+		return (true);
+
+	std::pair<std::string, int>	p1(std::string("str1"), 1);
+	std::pair<std::string, int>	p2(std::string("str2"), 2);
+
+	if (value_comp(p1, p2) != true)
+		return (true);
+
+	return (false);
+}
+
+static int	test_get_alloc(void)
+{
+	ft::map<std::string, int>					m;
+	ft::map<std::string, int>::allocator_type	alloc = m.get_allocator();
+
+	return (alloc.max_size());
+}
+
+static int	test_get_alloc_std(void)
+{
+	std::map<std::string, int>					m;
+	std::map<std::string, int>::allocator_type	alloc = m.get_allocator();
+
+	return (alloc.max_size());
+}
+
+static int	test_lb(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.lower_bound("str1")->second != 42
+			|| m.lower_bound("str2")->second != -21
+			|| m.lower_bound("weird")->second != 84
+			|| m.lower_bound("strange")->second != 0
+			|| m.lower_bound("first")->second != 69)
+		return (true);
+	if (m.lower_bound("no")->second != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_lb_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.lower_bound("str1")->second != 42
+			|| m.lower_bound("str2")->second != -21
+			|| m.lower_bound("weird")->second != 84
+			|| m.lower_bound("strange")->second != 0
+			|| m.lower_bound("first")->second != 69)
+		return (true);
+	if (m.lower_bound("no")->second != 42)
+		return (true);
+
+	return (false);
+}
+
 bool	test_map(void)
 {
 	bool	ret;
@@ -799,6 +987,11 @@ bool	test_map(void)
 	ret |= tl("clear", &test_clear, &test_clear_std);
 	ret |= tl("erase", &test_erase, &test_erase_std);
 	ret |= tl("swap", &test_swap, &test_swap_std);
+	ret |= tl("count", &test_count, &test_count_std);
+	ret |= tl("find", &test_find, &test_find_std);
+	ret |= tl("key and value compare", &test_kv_comp, &test_kv_comp_std);
+	ret |= tl("get allocator", &test_get_alloc, &test_get_alloc_std);
+	ret |= tl("lower bound", &test_lb, &test_lb_std);
 
 	return (ret);
 }
