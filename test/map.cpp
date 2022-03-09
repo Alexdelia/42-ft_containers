@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 21:26:10 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/07 19:55:18 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:12:50 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ static int	test_insert(void)
 	}
 	if (m3.size() != TEST_SIZE || m3.empty() != false)
 		return (true);
-	
+
 	return (false);
 }
 
@@ -234,7 +234,7 @@ static int	test_insert_std(void)
 	}
 	if (m3.size() != TEST_SIZE || m3.empty() != false)
 		return (true);
-	
+
 	return (false);
 }
 
@@ -289,7 +289,7 @@ static int	test_m_iterator(void)
 	i2 = m1.end();
 	if (i1 != i2)
 		return (true);
-	
+
 	m1.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
 	m1.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
 	m1.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
@@ -307,7 +307,7 @@ static int	test_m_iterator(void)
 	std::cerr << std::endl;
 	for (ri = m1.rbegin(); ri != m1.rend(); ++ri)
 		std::cerr << "|" << ri->first << "\t: " << ri->second << "|" << std::endl;
-	
+
 	return (false);
 }
 
@@ -340,7 +340,7 @@ static int	test_m_iterator_std(void)
 	std::cerr << std::endl;
 	for (ri = m1.rbegin(); ri != m1.rend(); ++ri)
 		std::cerr << "|" << ri->first << "\t: " << ri->second << "|" << std::endl;
-	
+
 	return (false);
 }
 
@@ -356,7 +356,7 @@ static int	test_size(void)
 	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	if (m.size() != 5 || m.empty() != false || m.max_size() != 5)
 		return (true);
 
@@ -375,7 +375,7 @@ static int	test_size_std(void)
 	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	if (m.size() != 5 || m.empty() != false || m.max_size() != 5)
 		return (true);
 
@@ -415,9 +415,9 @@ static int	test_access(void)
 	std::cerr << m["no"] << std::endl;
 	m["still no"] = 512;
 	std::cerr << m["still no"] << std::endl << std::endl;
-	
+
 	std::cerr << mtos(m) << std::endl;
-	
+
 	return (false);
 }
 
@@ -454,9 +454,9 @@ static int	test_access_std(void)
 	std::cerr << m["no"] << std::endl;
 	m["still no"] = 512;
 	std::cerr << m["still no"] << std::endl << std::endl;
-	
+
 	std::cerr << mtos(m) << std::endl;
-	
+
 	return (false);
 }
 
@@ -474,13 +474,13 @@ static int	test_at(void)
 	{
 		std::cerr << C_GREEN << "OK" << std::endl;
 	}
-	
+
 	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	if (m.at("str1") != 42
 			|| m.at("str2") != -21
 			|| m.at("weird") != 84
@@ -517,13 +517,13 @@ static int	test_at_std(void)
 	{
 		std::cerr << C_GREEN << "OK" << std::endl;
 	}
-	
+
 	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	if (m.at("str1") != 42
 			|| m.at("str2") != -21
 			|| m.at("weird") != 84
@@ -554,13 +554,13 @@ static int	test_clear(void)
 	std::cerr << mtos(m);
 	if (m.size() != 0 || m.empty() != true)
 		return (true);
-	
+
 	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	m.clear();
 	std::cerr << mtos(m);
 	if (m.size() != 0 || m.empty() != true)
@@ -577,13 +577,13 @@ static int	test_clear_std(void)
 	std::cerr << mtos(m);
 	if (m.size() != 0 || m.empty() != true)
 		return (true);
-	
+
 	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
 	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
 	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
-	
+
 	m.clear();
 	std::cerr << mtos(m);
 	if (m.size() != 0 || m.empty() != true)
@@ -787,7 +787,7 @@ static int	test_swap_std(void)
 static int	test_count(void)
 {
 	ft::map<std::string, int>	m;
-	
+
 	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
@@ -809,7 +809,7 @@ static int	test_count(void)
 static int	test_count_std(void)
 {
 	std::map<std::string, int>	m;
-	
+
 	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
 	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
 	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
@@ -972,6 +972,244 @@ static int	test_lb_std(void)
 	return (false);
 }
 
+static int	test_ub(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.upper_bound("str1")->second != -21
+			|| m.upper_bound("str2")->second != 0
+			/*|| m.upper_bound("weird")->second != (random because last)*/
+			|| m.upper_bound("strange")->second != 84
+			|| m.upper_bound("first")->second != 42)
+		return (true);
+	if (m.upper_bound("no")->second != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_ub_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.upper_bound("str1")->second != -21
+			|| m.upper_bound("str2")->second != 0
+			/*|| m.upper_bound("weird")->second != (random because last)*/
+			|| m.upper_bound("strange")->second != 84
+			|| m.upper_bound("first")->second != 42)
+		return (true);
+	if (m.upper_bound("no")->second != 42)
+		return (true);
+
+	return (false);
+}
+
+static int	test_equal_range(void)
+{
+	ft::map<std::string, int>	m;
+
+	m.insert(ft::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(ft::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(ft::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(ft::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(ft::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.equal_range("str1").first->first != "str1"
+			|| m.equal_range("str1").second->first != "str2"
+			|| m.equal_range("str2").first->first != "str2"
+			|| m.equal_range("str2").second->first != "strange"
+			|| m.equal_range("weird").first->first != "weird"
+			//<< "weird|" << m.equal_range("weird").second->first << std::endl
+			|| m.equal_range("strange").first->first != "strange"
+			|| m.equal_range("strange").second->first != "weird"
+			|| m.equal_range("first").first->first != "first"
+			|| m.equal_range("first").second->first != "str1"
+			|| m.equal_range("no").first->first != "str1"
+			|| m.equal_range("no").second->first != "str1")
+		return (true);
+
+	return (false);
+}
+
+static int	test_equal_range_std(void)
+{
+	std::map<std::string, int>	m;
+
+	m.insert(std::make_pair(static_cast<std::string>("str1"), 42));
+	m.insert(std::make_pair(static_cast<std::string>("str2"), -21));
+	m.insert(std::make_pair(static_cast<std::string>("weird"), 84));
+	m.insert(std::make_pair(static_cast<std::string>("strange"), 0));
+	m.insert(std::make_pair(static_cast<std::string>("first"), 69));
+
+	if (m.equal_range("str1").first->first != "str1"
+			|| m.equal_range("str1").second->first != "str2"
+			|| m.equal_range("str2").first->first != "str2"
+			|| m.equal_range("str2").second->first != "strange"
+			|| m.equal_range("weird").first->first != "weird"
+			//<< "weird|" << m.equal_range("weird").second->first << std::endl
+			|| m.equal_range("strange").first->first != "strange"
+			|| m.equal_range("strange").second->first != "weird"
+			|| m.equal_range("first").first->first != "first"
+			|| m.equal_range("first").second->first != "str1"
+			|| m.equal_range("no").first->first != "str1"
+			|| m.equal_range("no").second->first != "str1")
+		return (true);
+
+	return (false);
+}
+
+static int	test_relational(void)
+{
+	ft::map<std::string, int>	m1;
+	ft::map<std::string, int>	m2;
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 42)
+		return (true);
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "no" << i;
+		m2.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 42)
+		return (true);
+
+	if (m1 != m1 || m1 == m2)
+		return (true);
+	if (m1 < m2 || m1 < m1)
+		return (true);
+	if (m1 <= m2)
+		return (true);
+	if (m2 > m1 || m1 > m1)
+		return (true);
+	if (m2 >= m1)
+		return (true);
+
+	return (false);
+}
+
+static int	test_relational_std(void)
+{
+	std::map<std::string, int>	m1;
+	std::map<std::string, int>	m2;
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 42)
+		return (true);
+
+	FOR(42)
+	{
+		std::ostringstream	ss;
+		ss << "no" << i;
+		m2.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 42)
+		return (true);
+
+	if (m1 != m1 || m1 == m2)
+		return (true);
+	if (m1 < m2 || m1 < m1)
+		return (true);
+	if (m1 <= m2)
+		return (true);
+	if (m2 > m1 || m1 > m1)
+		return (true);
+	if (m2 >= m1)
+		return (true);
+
+	return (false);
+}
+
+static int	test_swap_nm(void)
+{
+	ft::map<std::string, int>	m1;
+	ft::map<std::string, int>	m2;
+
+	FOR(5)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 5)
+		return (true);
+
+	FOR(3)
+	{
+		std::ostringstream	ss;
+		ss << "no" << i;
+		m2.insert(ft::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 3)
+		return (true);
+
+	m1.swap(m2);
+
+	if (m1.size() != 3 || m2.size() != 5)
+		return (true);
+
+	std::cerr << mtos(m1) << std::endl << mtos(m2) << std::endl;
+
+	return (false);
+}
+
+static int	test_swap_nm_std(void)
+{
+	std::map<std::string, int>	m1;
+	std::map<std::string, int>	m2;
+
+	FOR(5)
+	{
+		std::ostringstream	ss;
+		ss << "str" << i;
+		m1.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m1.size() != 5)
+		return (true);
+
+	FOR(3)
+	{
+		std::ostringstream	ss;
+		ss << "no" << i;
+		m2.insert(std::make_pair(ss.str(), (int)i));
+	}
+	if (m2.size() != 3)
+		return (true);
+
+	m1.swap(m2);
+
+	if (m1.size() != 3 || m2.size() != 5)
+		return (true);
+
+	std::cerr << mtos(m1) << std::endl << mtos(m2) << std::endl;
+
+	return (false);
+}
+
 bool	test_map(void)
 {
 	bool	ret;
@@ -992,6 +1230,10 @@ bool	test_map(void)
 	ret |= tl("key and value compare", &test_kv_comp, &test_kv_comp_std);
 	ret |= tl("get allocator", &test_get_alloc, &test_get_alloc_std);
 	ret |= tl("lower bound", &test_lb, &test_lb_std);
+	ret |= tl("upper bound", &test_ub, &test_ub_std);
+	ret |= tl("equal range", &test_equal_range, &test_equal_range_std);
+	ret |= tl("relational operator", &test_relational, &test_relational_std);
+	ret |= tl("swap non member", &test_swap_nm, &test_swap_nm_std);
 
 	return (ret);
 }
