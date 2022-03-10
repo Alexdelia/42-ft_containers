@@ -6,12 +6,13 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 16:11:59 by adelille          #+#    #+#             */
-/*   Updated: 2022/02/06 13:33:24 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:45:43 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.hpp"
 
+#ifdef STD11
 bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 {
 	int								ret;
@@ -61,6 +62,41 @@ bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
 	}
 	return ((ret ? true : false));
 }
+#endif
+
+#ifndef STD11
+bool	tl(const std::string &name, int (*f)(void), int (*f_std)(void))
+{
+	int				ret;
+	int				ret_std;
+	struct winsize	w;
+	int				indent;
+
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	indent = w.ws_col - 9 - name.size();
+	std::cout << C_BOLD << C_MAGENTA << C_DIM << "  [" + name + "]"
+		<< std::string((indent < 1 ? 1 : indent), ' ') << C_RESET;
+	std::cerr << std::endl;
+	ret = f();
+	if (f_std)
+	{
+		ret_std = f_std();
+		if (ret != ret_std)
+		{
+			std::cout << C_BOLD << C_RED << "[✗]" << C_RESET << std::endl;
+			std::cerr << std::endl;
+			return (true);
+		}
+		else
+		{
+			std::cout << C_BOLD << C_GREEN << "[✔]" << C_RESET << std::endl;
+			std::cerr << std::endl;
+			return (false);
+		}
+	}
+	return ((ret ? true : false));
+}
+#endif
 
 bool	ts(const std::string &name, bool (*f)(void))
 {

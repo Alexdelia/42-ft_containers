@@ -6,7 +6,7 @@
 #    By: adelille <adelille@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 19:21:49 by adelille          #+#    #+#              #
-#    Updated: 2022/03/05 22:09:15 by adelille         ###   ########.fr        #
+#    Updated: 2022/03/10 12:47:34 by adelille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,13 @@ AR =	ar rcs
 RM = 	rm -rf
 
 CFLAGS =	-Wall -Werror -Wextra
-# CFLAGS +=	-std=c++98
 # CFLAGS +=	-O2
 CFLAGS +=	-g3
 # CFLAGS +=	-fsanitize=address
+
+# to have counter, use -DSTD11=1, and comment -std=c++98
+# CFLAGS +=	-std=c++98
+CFLAGS +=	-DSTD11=1
 
 # **************************************************************************** #
 #	MAKEFILE	#

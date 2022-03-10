@@ -6,7 +6,7 @@
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:52:18 by adelille          #+#    #+#             */
-/*   Updated: 2022/03/05 21:26:53 by adelille         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:35:39 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(void)
 
 	ret = 0;
 	ret |= ts("iterator", &test_iterator);
-	ret |= ts("eable if/is integral", &test_enable_if_is_integral);
+	//ret |= ts("eable if/is integral", &test_enable_if_is_integral);
 	ret |= ts("vector", &test_vector);
 	ret |= ts("stack", &test_stack);
 	ret |= ts("pair", &test_pair);
